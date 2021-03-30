@@ -1,0 +1,31 @@
+.remove {
+    position: absolute;
+    left: 0px;
+    opacity: 0;
+}
+
+.names:hover > .remove {
+    left: -15px;
+    transform: rotate(45deg);
+    opacity: 1;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.delTooltip {
+    position: absolute;
+    z-index: 1;
+    left: 3%;
+    top: -100%;
+    visibility: hidden;
+    width: 80px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+}
+
+.remove:hover ~ .delTooltip {
+    visibility: visible;
+}

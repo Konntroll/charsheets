@@ -1,0 +1,45 @@
+<div id="navbar">
+    <div id="logoHolder">
+         <img src="../../../assets/logo.png" 
+              id="logo"/>
+    </div>
+    <div id="menu">
+        <div class="navitems"
+             id="public">
+             <a routerLink="/">About</a>
+        </div>
+        <div class="navitems"
+             id="public">
+             <a routerLink="/public">Public</a>
+        </div>
+        <div class="navitems"
+             id="private"
+             *ngIf="loginService.loggedIn">
+             <a routerLink="/private">Private</a>
+        </div>
+    </div>
+    <div id="login">
+        <div class="navitems"
+             id="signin"
+             *ngIf="!loginService.loggedIn">
+             <a routerLink="/signin">Sign in</a>
+        </div>
+        <div class="navitems"
+             id="signup"
+             *ngIf="!loginService.loggedIn">
+             <a routerLink="/signup">Sign up</a>
+        </div>
+        <div class="navitems"
+             id="hi"
+             *ngIf="loginService.user$ | async as user"
+             [ngStyle]="{'cursor': 'default'}">
+             Hi, {{user.displayName}}!
+          </div>
+        <div class="navitems"
+             id="signout"
+             *ngIf="loginService.loggedIn"
+             (click)="loginService.signout()">
+             Sign out
+        </div>
+    </div>
+</div>

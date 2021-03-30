@@ -1,0 +1,26 @@
+<div [attr.contenteditable]="editable"
+     #name
+     class="names"
+     (focus)="focused(name.innerText)"
+     (focusout)="log(name.innerText, trait[1])"
+     (keydown.enter)="noLineBreaks($event)"
+     (keyup.enter)="log(name.innerText, trait[1])">
+     {{trait[0]}}
+     <fa-icon *ngIf="removeable"
+              [icon]="del"
+              class="remove"
+              size="xs"
+              (click)="remove(trait[0])">
+     </fa-icon>
+     <span class="delTooltip">Delete</span>
+</div>
+
+<div class="ranks"
+     [ngStyle]="ranksWidth()">
+    <div class="dots"
+         *ngFor="let item of [].constructor(traitMax); let rank = index"
+         id={{rank}}
+         (click)="adjustRank(trait, rank)"
+         [ngStyle]="{'background-color': rank >= trait[1]? 'white' : 'red'}">
+     </div>
+</div>

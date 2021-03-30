@@ -1,0 +1,298 @@
+<div id="sheet"
+     [ngStyle]="{'width': expansionFactor > 0 ? sheetExpansion : '1075px'}">
+    <div id="main"
+         [ngStyle]="{'width': expansionFactor > 0 ? categoryExpansion : '800px'}">
+        <div id="info">
+            <div class="headers"
+                id="charname"
+                #charName
+                contenteditable="true"
+                class="subheaders"
+                (focus)="focused(charName.innerText)"
+                (focusout)="changeCharName(charName.innerText)"
+                (keydown.enter)="noLineBreaks($event)"
+                (keyup.enter)="changeCharName(charName.innerText)">
+                {{characterName}}
+            </div>
+            <div id="controls">
+                <div *ngIf="isAuthor && !isPublished"
+                     (click)="togglePublicationStatus(true)">Publish</div>
+                <div *ngIf="isAuthor && isPublished"
+                     (click)="togglePublicationStatus(false)">Unpublish</div>
+                <div *ngIf="isAuthor"
+                     (click)="showPicSelector()"
+                     id="picButton">Pic
+                    <span class="tooltip">Pick a pic!</span>
+                </div>
+                <div *ngIf="isAuthor"
+                     (click)=deleteChar(characterID)>Delete</div>
+                <div *ngIf="!isAuthor">You cannot edit this character.</div>
+            </div>
+            <div class="entries"
+                    *ngFor="let entry of info; let i = index; trackBy:miscTracker">
+                <div class="names">{{entry[0]}}</div>
+                <input type="text" 
+                    (focusout)="updateInfo(info[i])"
+                    (keyup.enter)="updateInfo(info[i])"
+                    [(ngModel)]="info[i][1]"/>
+            </div>
+        </div>
+        <div class="headers">Attributes</div>
+        <div class="categories" id="attributes"
+             [ngStyle]="{'width': expansionFactor > 0 ? categoryExpansion : '800px'}">
+            <div class="subcategories" id="physical"
+                 [ngStyle]="{'width': expansionFactor > 0 ? subcategoryExpansion : '230px'}">
+                <div class="subheaders">Physical</div>
+                <trait *ngFor="let trait of physical"
+                    [trait]=trait
+                    [lowGenFactor]=expansionFactor
+                    [path]="'attributes.physical.'"
+                    [editable]=false
+                    [removeable]=false
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+            <div class="subcategories" id="social"
+                 [ngStyle]="{'width': expansionFactor > 0 ? subcategoryExpansion : '230px'}">
+                <div class="subheaders">Social</div>
+                <trait *ngFor="let trait of social"
+                    [trait]=trait
+                    [lowGenFactor]=expansionFactor
+                    [path]="'attributes.social.'"
+                    [editable]=false
+                    [removeable]=false
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+            <div class="subcategories" id="mental"
+                 [ngStyle]="{'width': expansionFactor > 0 ? subcategoryExpansion : '230px'}">
+                <div class="subheaders">Mental</div>
+                <trait *ngFor="let trait of mental"
+                    [trait]=trait
+                    [lowGenFactor]=expansionFactor
+                    [path]="'attributes.mental.'"
+                    [editable]=false
+                    [removeable]=false
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+        </div>
+        <div class="headers">Abilities</div>
+        <div class="categories" id="abilities"
+             [ngStyle]="{'width': expansionFactor > 0 ? categoryExpansion : '800px'}">
+            <div class="subcategories" id="talents"
+                 [ngStyle]="{'width': expansionFactor > 0 ? subcategoryExpansion : '230px'}">
+                <div class="subheaders">
+                    Talents
+                    <fa-icon [icon]="plusSymbol"
+                            class="addEntry"
+                            size="xs"
+                            (click)="addEntry('abilities.talents.')"></fa-icon>
+                    <span class="tooltip">Add a talent</span>
+                </div>
+                <trait *ngFor="let trait of talents"
+                    [trait]=trait
+                    [lowGenFactor]=expansionFactor
+                    [path]="'abilities.talents.'"
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+            <div class="subcategories" id="skills"
+                 [ngStyle]="{'width': expansionFactor > 0 ? subcategoryExpansion : '230px'}">
+                <div class="subheaders">
+                    Skills
+                    <fa-icon [icon]="plusSymbol"
+                            class="addEntry"
+                            size="xs"
+                            (click)="addEntry('abilities.skills.')"></fa-icon>
+                    <span class="tooltip">Add a skill</span>
+                </div>
+                <trait *ngFor="let trait of skills"
+                    [trait]=trait
+                    [lowGenFactor]=expansionFactor
+                    [path]="'abilities.skills.'"
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+            <div class="subcategories" id="knowledges"
+                 [ngStyle]="{'width': expansionFactor > 0 ? subcategoryExpansion : '230px'}">
+                <div class="subheaders">
+                    Knowledges
+                    <fa-icon [icon]="plusSymbol"
+                            class="addEntry"
+                            size="xs"
+                            (click)="addEntry('abilities.knowledges.')"></fa-icon>
+                    <span class="tooltip">Add a knowledge</span>
+                </div>
+                <trait *ngFor="let trait of knowledges"
+                    [trait]=trait
+                    [lowGenFactor]=expansionFactor
+                    [path]="'abilities.knowledges.'"
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+        </div>
+        <div class="headers">Advantages</div>
+        <div class="categories" id="advantages"
+             [ngStyle]="{'width': expansionFactor > 0 ? categoryExpansion : '800px'}">
+            <div class="subcategories" id="backgrounds"
+                 [ngStyle]="{'width': expansionFactor > 0 ? subcategoryExpansion : '230px'}">
+                <div class="subheaders">
+                    Backgrounds
+                    <fa-icon [icon]="plusSymbol"
+                            class="addEntry"
+                            size="xs"
+                            (click)="addEntry('advantages.backgrounds.')"></fa-icon>
+                    <span class="tooltip">Add a background</span>
+                </div>
+                <trait *ngFor="let trait of backgrounds"
+                    [trait]=trait
+                    [lowGenFactor]=expansionFactor
+                    [path]="'advantages.backgrounds.'"
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+            <div class="subcategories" id="disciplines"
+                 [ngStyle]="{'width': expansionFactor > 0 ? subcategoryExpansion : '230px'}">
+                <div class="subheaders">
+                    Disciplines
+                    <fa-icon [icon]="plusSymbol"
+                            class="addEntry"
+                            size="xs"
+                            (click)="addEntry('advantages.disciplines.')"></fa-icon>
+                    <span class="tooltip">Add a discipline</span>
+                </div>
+                <trait *ngFor="let trait of disciplines"
+                    [trait]=trait
+                    [lowGenFactor]=expansionFactor
+                    [path]="'advantages.disciplines.'"
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+            <div class="subcategories" id="virtues">
+                <div class="subheaders">Virtues</div>
+                <trait *ngFor="let trait of virtues"
+                    [trait]=trait
+                    [path]="'advantages.virtues.'"
+                    [removeable]=false
+                    [isAuthor]=isAuthor
+                    class="traits">
+                </trait>
+            </div>
+        </div>
+    </div>
+    <div id="side">
+        <div id="dice">
+            <dice></dice>
+        </div>
+        <div class="subcategories" id="vitals">
+            <div contenteditable="true"
+                #pathName
+                class="subheaders"
+                (focus)="focused(pathName.innerText)"
+                (focusout)="changePathName(pathName.innerText, path[1])"
+                (keydown.enter)="noLineBreaks($event)"
+                (keyup.enter)="changePathName(pathName.innerText, path[1])">
+                {{path[0]}}
+            </div>
+            <div class="traits">
+                <div class="vranks">
+                    <div class="dots"
+                        *ngFor="let item of [].constructor(10); let rank = index"
+                        id={{rank}}
+                        (click)="adjustVRank(['other.path.' + path[0], path[1]], rank)"
+                        [ngStyle]="{'background-color': rank >= path[1]? 'white' : 'red'}">
+                    </div>
+                </div>
+            </div>
+            <div class="subheaders">Willpower</div>
+            <div class="traits">
+                <div class="vranks">
+                    <div class="dots"
+                        *ngFor="let item of [].constructor(10); let rank = index"
+                        id={{rank}}
+                        (click)="adjustVRank(['other.willpower.permanent', willpower[1].permanent], rank)"
+                        [ngStyle]="{'background-color': rank >= willpower[1].permanent? 'white' : 'red'}">
+                    </div>
+                    <div class="squares"
+                        *ngFor="let item of [].constructor(10); let rank = index"
+                        id={{rank}}
+                        (click)="adjustVRank(['other.willpower.current', willpower[1].current], rank)"
+                        [ngStyle]="{'background-color': rank >= willpower[1].current? 'white' : 'red'}">
+                    </div>
+                </div>
+            </div>
+            <div class="subheaders">Blood pool</div>
+            <div class="traits">
+                <div class="vranks">
+                    <div class="squares"
+                        *ngFor="let item of [].constructor(bloodpoolMax); let rank = index"
+                        id={{rank}}
+                        (click)="adjustVRank(['other.bloodpool', bloodpool[1]], rank)"
+                        [ngStyle]="{'background-color': rank >= bloodpool[1]? 'white' : 'red'}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="headers" id="healthHeader">
+            Health
+            <input type="checkbox" id="aggrToggle" [(ngModel)]="applyAggr"/>
+            <span class="tooltip">Toggle aggravated</span>
+        </div>
+        <div class="subcategories" id="health">
+            <div class="h-levels" *ngFor="let level of health.levels; let rank = index">
+                <div class="names">{{level.name}}</div>
+                <div class="modifiers">{{level.modifier}}</div>
+                <div class="squares"
+                    (click)="adjustHLevels(health.damage, rank)"
+                    [ngStyle]="{'background-color': rank < health.damage.aggravated ? 'black' :
+                                                    rank >= health.damage.regular ? 'white' : 'red'}">
+                </div>
+            </div>
+        </div>
+        <div class="headers">Merits & Flaws</div>
+        <div class="subcategories" id="misc">
+            <input type="text" 
+                *ngFor="let entry of misc; let i = index; trackBy:miscTracker"
+                (focusout)="updateMisc()"
+                (keyup.enter)="updateMisc()"
+                [(ngModel)]="misc[i]"
+                value="entry"/>
+        </div>
+    </div>
+</div>
+<div id="picContainer" *ngIf="charPic">
+    <img id="charPic" [src]="['../../../assets/charimages/' + charPic + '.png']" />
+    <fa-icon [icon]="picRemover"
+             id="removePic"
+             size="2x"
+             (click)="removePic()"></fa-icon>
+</div>
+<div id="picSelectorTab"
+     [ngStyle]="picSelectorStyle()">
+    <form id="tagSelector">
+        <fa-icon id="closeIcon" [icon]="plusSymbol"
+                        size="lg"
+                        (click)="showPicSelector()"></fa-icon>
+        <label for="tags">Tags:</label>
+        <select class="form-control" id="tags" [(ngModel)]="tagOption" name="tags">
+            <option *ngFor="let tag of tags" (click)="fetchPics()">{{tag}}</option>
+        </select>
+        <button (click)="fetchPics()">Show!</button>
+    </form>
+    <div id="picDisplay">
+        <div id="gap"></div>
+         <img class="pics"
+              *ngFor="let pic of pics | async"
+              [src]="['../../../assets/charimages/' + pic.id + '.png']"
+              (click)="assignPic(pic.id)">
+    </div>
+</div>

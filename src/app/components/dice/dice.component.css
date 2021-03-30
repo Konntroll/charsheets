@@ -1,0 +1,91 @@
+#dice {
+	display: grid;
+	grid-template-columns: repeat(7, auto);
+	width: 250px;
+}
+
+#difficulty {
+	grid-column-start: 1;
+	grid-column-end: 4;
+}
+
+#dicenum {
+	grid-column-start: 4;
+	grid-column-end: 6;
+}
+
+#result {
+	grid-column-start: 6;
+	grid-column-end: 8;	
+}
+
+#roll {
+	position: relative;
+	grid-column-start: 1;
+	grid-column-end: 8;
+    cursor: pointer;
+}
+
+#clear {
+	position: absolute;
+	right: 4px;
+	top: 0px;
+}
+
+.varparams {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	border: 2px solid;
+	border-radius: 5px;
+	height: 28px;
+	margin: 1px;	
+}
+
+.header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: black;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	border-radius: 5px;
+	height: 32px;
+	margin: 1px;
+}
+
+.dienum {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: black;
+	border-radius: 10%;
+	height: 32px;
+	width: 32px;
+	font-weight: bold;
+	font-size: 14px;
+	font-family: 'zilla slab', sans-serif;
+	color: white;
+	margin: 1px;
+    cursor: pointer;
+}
+
+.plusminus {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: red;
+	border-radius: 10%;
+	height: 32px;
+	width: 32px;
+	font-weight: bold;
+	font-size: 14px;
+	font-family: 'zilla slab', sans-serif;
+	color: white;
+	margin: 1px;
+    cursor: pointer;
+}

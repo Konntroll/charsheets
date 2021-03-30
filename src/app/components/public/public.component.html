@@ -1,0 +1,31 @@
+<div id="envelope">
+    <div id="display">
+        <div class="cards" id="charSearch">
+            <form id="selectionRefinery">
+                <label for="tags">Filter by:</label>
+                <select class="form-control" id="path" [(ngModel)]="path" name="path">
+                    <option *ngFor="let option of searchOptions">{{option}}</option>
+                </select>
+                <input type="text"
+                       [(ngModel)]="query"
+                       name="query"
+                       placeholder="Enter your query...">
+                <div id="searchButtons">
+                    <button (click)="refineDisplay()">Refine</button>
+                    <button (click)="ngOnInit()">Reset</button>
+                </div>
+            </form>
+        </div>
+        <div class="cards"
+             *ngFor="let char of published | async"
+             (click)="openChar(char.charID)">
+            <h2>{{ char.Name }}</h2>
+            <div><b>Clan:</b> {{ char.meta.Clan }}</div>
+            <div><b>Generation:</b> {{ char.meta.Generation }}</div>
+            <div><b>Nature:</b> {{ char.meta.Nature }}</div>
+            <div><b>Demeanor:</b> {{ char.meta.Demeanor }}</div>
+            <div><b>Concept:</b> {{ char.meta.Concept }}</div>
+            <img *ngIf="char.pic" [src]="['../../../assets/charimages/' + char.pic + '.png']" />
+        </div>
+    </div>
+</div>

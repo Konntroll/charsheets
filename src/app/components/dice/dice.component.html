@@ -1,0 +1,27 @@
+<div id="dice">
+    <div class="header" id="difficulty">Difficulty</div>
+    <div class="header" id="dicenum">Dice</div>
+    <div class="header" id="result">Result</div>
+    <div class="plusminus"
+         (click)="adjustDifficulty(-1)">-</div>
+    <div class="varparams" id="difficultyval">{{difficulty}}</div>
+    <div class="plusminus"
+         (click)="adjustDifficulty(1)">+</div>
+    <div class="varparams" id="dicenum">{{dice}}</div>
+    <div class="varparams" id="result">{{success}}</div>
+    <div *ngFor="let item of [].constructor(13); let i = index"
+         class="dienum"
+         (click)="setNumberOfDice(i)">{{i+1}}</div>
+    <div class="plusminus"
+         (click)="addADie()">+</div>
+    <div class="header" id="roll" (click)="rollDice()">Roll</div>
+    <div class="varparams"
+         id="roll"
+         *ngIf="output.length > 0"
+         (click)="output = ''">
+         {{output}}
+         <fa-icon [icon]="clear"
+                   id="clear"
+                   size="xs"></fa-icon>
+    </div>
+</div>

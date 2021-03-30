@@ -1,0 +1,95 @@
+#envelope {
+    display: flex;
+    justify-content: center;
+}
+
+#display {
+    display: flex;
+    width: 1400px;
+    flex-wrap: wrap;
+}
+
+.cards {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 4px solid black;
+    border-radius: 20px;
+    margin: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.cards,div{
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+#deleteIcon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transform: rotate(45deg);
+    z-index: 5;
+}
+
+#newCharCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+#charSearch {
+    display: flex;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0px 0px 0px 10px;
+}
+
+select, input {
+    height: 30px;
+    font-size: 20px;
+    width: 280px;
+    margin: 10px 0px 10px 10px;
+    outline: none;
+}
+
+#searchButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#searchButtons > button {
+    height: 30;
+    font-size: 20px;
+}
+
+input {
+    width: 276px;
+    padding: 0px;
+    margin: 10px 0px 10px 10px;
+}
+
+img {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: 250px;
+    opacity: 0.4;
+}
+
+.cards:hover > img {
+    opacity: 1;
+    transition: opacity 0.5s;
+}

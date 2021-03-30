@@ -1,0 +1,337 @@
+#sheet {
+  display: flex;
+  justify-content: space-between;
+  width: 1075px;
+  margin: auto;
+}
+
+#main {
+    width: 800px;
+}
+
+#side {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    z-index: 2;
+}
+
+.headers {
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 5px 0px;
+    background-color: rgba(215,215,215,0.5);
+}
+
+.subheaders {
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 3px 0px;
+    outline: none;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+}
+
+.subcategories {
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+}
+
+#info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px 20px;
+}
+
+#charname {
+  grid-column: 1/4;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  margin: 0px 0px 5px 0px;
+  background-color: black;
+}
+
+#controls {
+  display: flex;
+  margin-bottom: 3px;
+}
+
+#controls div {
+  display: flex;
+  flex-grow: 1;
+  border-radius: 5px;
+  background: black;
+  font-size: 20px;
+  line-height: 20px;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 3px 0px 3px;
+  cursor: pointer;
+}
+
+.entries {
+  display: flex;
+  margin-bottom: 3px;
+}
+
+.entries input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  font-family: Serif;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 0px;
+  margin: 0px 0px 0px 5px;
+  text-align: center;
+  outline: none;
+}
+
+#side .subcategories {
+  align-self: center;
+}
+
+.subcategories:last-child {
+  margin-bottom: 3px;
+}
+
+.traits {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+}
+
+.names {
+    position: relative;
+    flex: 2;
+    font-size: 20px;
+    line-height: 20px;
+    outline: none;
+}
+
+.ranks {
+    display: flex;
+    flex: 1;
+}
+
+.dots {
+    width: 16px;
+    height: 16px;
+    margin-right: 1px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.dots:last-child {
+    margin-right: 0px;
+}
+
+.squares {
+    width: 16px;
+    height: 16px;
+    margin-right: 1px;
+    border: 2px solid black;
+}
+
+.vranks {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  margin: auto;
+  gap: 1px;
+}
+
+#aggrToggle {
+  position: absolute;
+  right: 4px;
+  top: 8px;
+}
+
+#health {
+  display: flex;
+  flex-direction: column;
+}
+
+.h-levels {
+  display: flex;
+  margin: 0px 0px 1px 20px;
+}
+
+.h-levels:last-child {
+  margin: 0px 0px 0px 20px;
+}
+
+.h-levels .squares {
+  margin-right: 20px;
+}
+
+.modifiers {
+  margin: 0px 20px;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+#misc input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  font-family: Serif;
+  font-size: 20px;
+  line-height: 20px;
+  background-color: rgba(255,255,255,0);
+  outline: none;
+}
+
+.addEntry {
+  position: absolute;
+  right: 4px;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 3;
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+}
+
+.addEntry:hover ~ .tooltip {
+  left: 100%;
+  top: -100%;
+  visibility: visible;
+}
+
+#picButton {
+  position: relative;
+}
+
+#picButton:hover .tooltip {
+  left: 80%;
+  top: -135%;
+  background-color: rgb(120,120,120);
+  font-size: 20px;
+  font-weight: normal;
+  visibility: visible;
+}
+
+#aggrToggle:hover ~ .tooltip {
+  left: 100%;
+  top: -100%;
+  font-size: 20px;
+  font-weight: normal;
+  visibility: visible;
+  z-index: 3;
+}
+
+#picContainer {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  height: 750px;
+  width: 350px;
+}
+
+#charPic {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: -1;
+}
+
+#removePic {
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
+  z-index: 0;
+  opacity: 0;
+  color: red;
+}
+
+#picContainer:hover > #removePic {
+  right: 10px;
+  transform: rotate(45deg);
+  opacity: 1;
+  transition: all 1s;
+  cursor: pointer;
+}
+
+#picSelectorTab {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  width: 400px;
+  height: 100%;
+  color: white;
+  transition: left 1s;
+}
+
+#tagSelector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: black; 
+}
+
+#closeIcon {
+  position: absolute;
+  top: 3px;
+  right: -2px;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
+#gap {
+  height: 10px;
+}
+
+#tagSelector * {
+  margin: 0px 5px 0px 5px;
+}
+
+#tagSelector label {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#tagSelector select {
+  height: 30px;
+  font-size: 20px;
+}
+
+#tagSelector button {
+  height: 30px;
+  font-size: large;
+}
+
+#picDisplay {
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: rgba(215,215,215,0.5);
+}
+
+.pics {
+  height: 175px;
+  margin: 10px;
+  cursor: pointer;
+}
